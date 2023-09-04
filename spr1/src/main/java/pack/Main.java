@@ -15,8 +15,8 @@ public class Main {
 		// Spring을 사용 : IOC-제어의 역전 객체관리를 spring이 함
 		
 		ApplicationContext context = new ClassPathXmlApplicationContext("init.xml");
-		((ConfigurableApplicationContext)context).close();
 		HelloInter  inter = (HelloInter)context.getBean("hello");  // 이렇게 치환하는걸 di라고 한다는디
 		inter.sayHello("한국인");
+		((ConfigurableApplicationContext)context).close();
 	}
 }
