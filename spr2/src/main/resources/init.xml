@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       <bean id="businessServiceImpl" class="pack.controller.BusinessServiceImpl" > 
+       <!-- 위의 클래스에서 부른건 파라미터가 없는 생성자를 호출한거임, 그래서 파라미터 없는 생성자를 impl에 만들어줘야함 -->
+			<constructor-arg>
+				<!-- 얘를 삽입함으로써 impl에 파라미터있는 생성자를 호출하게됨 -->
+					<ref bean="dataDaoImpl"/>
+				<!-- name으로 줄경우(아래에서)  <ref bean="sbs"/> 이렇게 써줘도 됨. id야 중복안되지만 name은 됨, 3개의 name중 암거나 줌-->
+			</constructor-arg>       
+       </bean>
+       <bean id="dataDaoImpl" name="kbs,mbc,sbs" class="pack.model.DataDaoImpl"/> <!-- 객체가 하나 만들어짐 -->
+</beans>
