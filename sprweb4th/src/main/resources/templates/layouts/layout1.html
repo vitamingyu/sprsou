@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body> <!--replace 대신 include, insert써도 됨. 근데 인클루드 쓰지 말자-->
+	<th:block th:replace="fragments/header.html::headerForm"></th:block>
+	
+	<div layout:fragment="content" class="content"></div>
+	
+	<th:block th:replace="fragments/footer.html::footerForm"></th:block> <!-- footer.html의 fragment이름-->
+</body>
+</html>

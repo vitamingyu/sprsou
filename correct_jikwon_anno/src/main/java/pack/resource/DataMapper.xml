@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dev">
+ <select id="selectDataAll" resultType="dto" >
+  select jikwon_no, jikwon_name,ifnull(buser_name,'무소속') as buser_name, date_format(jikwon_ibsail, '%Y') as ibsa from jikwon left outer join buser on jikwon.buser_num = buser.buser_no
+ </select>
+
+<select id="selectDataBuser" resultType="dto">
+	select buser_name, count(*) as inwon from jikwon inner join buser on buser.buser_no=jikwon.buser_num group by buser_name
+</select>
+
+<select id="selectMaxPay" resultType="dto">
+select ifnull((select buser_name from buser where buser_num=buser_no),'무소속') as buser_name, jikwon_name, jikwon_pay from jikwon a where a.jikwon_pay=(select max(b.jikwon_pay) from jikwon b where a.buser_num=b.buser_num) order by buser_num</select>
+</mapper>

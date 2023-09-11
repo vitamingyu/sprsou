@@ -5,6 +5,6 @@ public class DataDaoImpl implements DataDao{
 	
 	@Override
 	public void selectData() {
-		System.out.println("db와 연결한 후 selectData 수행"); //여기서 DB의 자료를 읽음 그리고 비즈니스서비스로 보냄
+		System.out.println("db와 연결한 후 selectData 수행"); //여기서 DB의 자료를 읽음(아직 구현 안함) 그리고 비즈니스서비스로 보냄
 	}
 }

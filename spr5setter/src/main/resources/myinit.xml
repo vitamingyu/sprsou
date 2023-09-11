@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean name="gugu" class="pack.model.Gugudan"/>
+	
+	<bean id="my" class="pack.controller.MyProcess">
+		<property name="name" value="김밥"/>
+		<property name="su" value="5"/>
+		<property name="calcInter" ref="gugu"/> <!-- class를 넣어줄 땐 ref를 이용함 -->
+	</bean>
+</beans>

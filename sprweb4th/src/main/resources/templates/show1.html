@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2> <th:text="'상품자료 출력'">직접 문자 삽입</h2>
+<table>
+	<tr><td>아이디</td><td><span th:text="${vo.id}"></span></td></tr>
+	<tr><td>상품명</td><td><span th:text="${vo.name}"></span></td></tr>
+	<tr><td>가격</td><td><span th:text="${vo.price}"></span></td></tr>
+	<tr><td>등록일</td><td>[[${vo.regDate}]]</td></tr>
+	
+</table>
+</body>
+</html>

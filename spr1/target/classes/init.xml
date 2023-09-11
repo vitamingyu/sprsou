@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-       <bean id="hello" class="pack.HelloMaven"/>
-       <!-- pack.HelloMaven hello = new pack.HelloMaven 이거 해준거임 지금 : 이걸 지금 singleton 처리 -->
-</beans>

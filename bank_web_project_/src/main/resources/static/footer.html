@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="footer.css">
+</head>
+<body>
+<div class="footer_new_wrap mgt0">
+            <script type="text/javascript">
+                jQuery(function($) {
+                    $("#selBankResSite, #selLicSite").on("change", function() {
+                        if($(this).val() === "") {
+                            return ;
+                        }
+                        
+                        if($(this).val().indexOf("http") >= 0) {
+                            var winNewTab = window.top.open($(this).val(), "_blank");
+                            winNewTab.focus();
+                        } else {
+                            goMenuPage($(this).val(), "PB");
+                        }
+                        
+                        $(this).find("option[value='']").attr("selected", true);
+                    });
+                });
+            </script>
+            
+            <div class="select-area">
+                <div class="select-area-inner">
+                    <select name="selBankResSite" id="selBankResSite">
+                        <option value="">에이콘은행 관련사이트</option>
+                        <option value="http://www.suhyupnews.co.kr/">어업in수산</option>
+                        <option value="http://fecwf.or.kr/">수협재단</option>
+                        <option value="https://www.susansijang.co.kr/nsis/miw/intro">수협노량진수산㈜</option>
+                        <option value="http://www.suhyupfeed.co.kr/">수협사료</option>
+                        <option value="http://suhyupinfras.co.kr/index.do">수협개발</option>
+                    </select>
+                    <select name="selLicSite" id="selLicSite">
+                        <option value="">조회 / 발급 서비스</option>
+                        <option value="http://www.sleepmoney.or.kr/jsp/cm/cdo0001.jsp">휴면계좌조회시스템</option>
+                        <option value="https://www.knote.kr/">어음정보시스템</option>
+                        <option value="http://dis.kofia.or.kr/websquare/index.jsp?w2xPath=/wq/fundann/DISFundSalEps.xml&amp;divisionld=MDIS01013001000000&amp;serviceld=SDIS01013001000">계열펀드수익률비용비교 공시</option>
+                        <option value="https://cmpl.fss.or.kr/kr/mw/inh/main.jsp">상속인금융거래조회서비스</option>
+                        <option value="http://www.smefn.or.kr/index.do">기업금융나들목</option>
+                        <option value="PBM01960">증명서발급 및 조회</option>
+                        <option value="http://www.fss.or.kr/s1332/">서민금융1332</option>
+                        <option value="PBM01150">중소기업금융지원</option>
+                        <option value="PBM01359">금리인하요구권제도</option>
+                        <option value="https://portal.kfb.or.kr/main/main.php#pos01">은행금리비교</option>
+                        <option value="http://finlife.fss.or.kr/main/main.do">금융상품한눈에</option>
+                    </select>
+                </div>
+            </div>
+            
+        <div class="footer_data_wrap">
+            <ul class="footer_go_area">
+                <li><a href="http://www.suhyup.co.kr/" target="_new" title="새창으로 열림">수협중앙회</a></li>
+                <li><a href="http://www.shshopping.co.kr/" target="_new" title="새창으로 열림">수협쇼핑</a></li>
+                <li id="newPolicy"><a href="https://partner.suhyup-bank.com" target="_blank" title="새창으로 열림"><strong>전자구매시스템</strong></a></li>
+                <li><a href="javascript:goMenuPage('PBM01668', 'PB');">보안프로그램안내</a></li>
+                <li><a href="javascript:goMenuPage('PBM00534', 'PB');"><strong>개인정보처리방침</strong></a></li>
+                <li><a href="javascript:goMenuPage('PBM01760', 'PB');"><strong>신용정보활용체제</strong></a></li>
+                <li><a href="javascript:goMenuPage('PBM01047', 'PB');">보호금융상품등록부</a></li>
+                <li><a href="javascript:goMenuPage('PBM01462', 'PB');"><strong>부조리신고</strong></a></li>
+            </ul>
+            
+            <div class="footer_site">
+                <a href="https://www.instagram.com/suhyupbank_official" target="_new" title="새창으로 열림" class="btn_footer_instar" style="text-indent:0;vertical-align:top"><img src="https://png.pngtree.com/png-clipart/20230401/original/pngtree-three-dimensional-instagram-icon-png-image_9015419.png" height="25" width="25" alt="인스타그램"></a>
+                <a href="https://www.facebook.com/suhyupbank" target="_new" title="새창" class="btn_footer_face" style="text-indent:0;vertical-align:top"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStnJHRuT2CH4nCq5FM3wU2KIQYYYjOWPVo6Ya4comv0l6jraO9" height="25" width="25"  alt="페이스북"></a>
+                <a href="http://blog.naver.com/suhyup_bank" target="_new" title="새창" class="btn_footer_blog" style="text-indent:0;vertical-align:top"><img src="https://mblogthumb-phinf.pstatic.net/MjAyMDA5MjRfMTQ0/MDAxNjAwOTI4MDIxMTQ4.LGGIcSU4FrU6c_-MgA5xerYp1KXlF290JkqaG9uTPskg.MHNU4ycUh0ivOCxgEDo6YWorwOtonE7zwtmJMr1I3RAg.PNG.thdnjs4484/%EB%B8%94%EB%A1%9C%EA%B7%B81.png?type=w800" height="25" width="25" alt="네이버 블로그"></a>
+                <a href="https://www.youtube.com/channel/UC7kw9TKPDEmNDen8o2sPGLg" target="_new" title="새창으로 열림" class="btn_footer_youtube" style="text-indent:0;vertical-align:top;background:none"><img src="https://e7.pngegg.com/pngimages/441/880/png-clipart-youtube-logo-youtube-computer-icons-logo-android-joystick-angle-electronics-thumbnail.png" height="25" width="25"  alt="유튜브"></a>
+            </div>
+            
+            <ul class="footer_tel">
+                <li>고객지원 : 1588-1515 / 1644-1515</li>
+                <li>해외이용 82-2-2013-0000</li>
+                <li>공제보험 1588-4119</li>
+                
+            </ul>
+            <p class="copyright">Copyrights 2017 Suhyup Bank. All Right Reserved. 대표이사 : 비타민규 </p>
+        </div>
+    </div>
+    </body>
+</html>
