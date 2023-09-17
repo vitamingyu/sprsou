@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pack.model.DataMappingInterface">
+	<select id="selectList" resultType="pack.model.Board">
+		select * from springboard order by num desc
+	</select>
+	
+	<select id="selectSearch" parameterType="pack.controller.BoardBean" resultType="pack.model.Board">
+		select * from springboard
+		where ${searchName} like concat('%',#{searchValue},'%') order by num desc
+	</select>
+	
+	<select id="selectOne" parameterType="string" resultType="pack.model.Board">
+		select * from springboard
+		where num=#{num}
+	</select> 
+	
+	<update id="updateReadcnt" parameterType="string">
+		update springboard set readcnt=readcnt + 1 where num=#{num}
+	</update>
+	
+	<insert id="insert" parameterType="pack.controller.BoardBean">
+		insert into springboard(num,author,title,content,bwrite,readcnt)
+		values((select max(num)+1 from springboard ali),#{author},#{title},#{content},now(),0)   <!-- 같은 서브쿼리?를 쓰고 있어서 별명을 줘야 오류가 안 뜸 ali라  별명을 줌 -->
+	</insert>
+	
+	<update  id="update" parameterType="pack.controller.BoardBean">
+		update springboard set author=#{author},title=#{title},content=#{content}  where num=#{num}
+	</update>
+	
+	<delete id="delete" parameterType="string">
+		delete from springboard where num=#{num}
+	</delete>
+</mapper>

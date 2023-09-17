@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h3>* 직원 자료 보기 *</h3>
+<table border="1">
+	<tr>
+		<th>사번</th><th>직원명</th><th>직급</th><th>부서명</th><th>관리고객</th>
+	</tr>
+	<th:block th:if="${jikwons.size() > 0}">
+		<tr th:each="data:${jikwons}">
+			<td th:text="${data.jikwon_no}">사번</td>   <!-- 이걸 맴버필드라 하면 큰일난다~~~ getJikwon_no 이거다-->
+			<td>
+					<a th:href="@{/showgogek(jikwon_no=${data.jikwon_no},jikwon_name=${data.jikwon_name})}"
+						th:text="${data.jikwon_name}" target="myframe"/>
+			</td>
+			<td th:text="${data.jikwon_jik}">직급</td>
+			<td th:text="${data.buser_name}">부서명</td>
+			<td th:text="${data.manage_gogek}">관리고객</td>
+		</tr>
+	</th:block>
+</table>
+<br/>
+<iframe name="myframe" width="99%" height="200px" frameborder="0" scrolling="yes"></iframe>
+</body>
+</html>

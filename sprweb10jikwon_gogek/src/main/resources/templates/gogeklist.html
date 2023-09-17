@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div>[[${jikwon_name}]]의 관리고객</div>
+
+<th:block th:if="${gogeks.size() > 0}"></th:block>
+<table border="1">
+	<tr>
+		<th>고객번호</th><th>고객명</th><th>성별</th><th>나이</th><th>전화</th>
+	</tr>
+	<tr th:each="gdata:${gogeks}">
+		<td th:text="${gdata.gogek_no}"></td>
+		<td th:text="${gdata.gogek_name}"></td>
+		<td th:text="${gdata.gogek_gen}"></td>
+		<td th:text="${gdata.gogek_age}"></td>
+		<td th:text="${gdata.gogek_tel}"></td>
+	</tr>
+	<tr>
+		<td colspan="5">인원 수 : [[${count}]]</td>
+	</tr>
+</table>
+</body>
+</html>

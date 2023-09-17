@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){ // 문서가 로딩되면~ 함수를 실행해
+	$("#btnShow").click(function(){
+		//alert("aa");
+		$.ajax({
+			type:"get",
+			url:"sangpum",
+			dataType:"json",
+			success:function(sangpumdata){
+				//alert(sangpumData.datas);     //datas는 json의 대표명
+				let str ="";
+				let sdatas=sangpumdata.datas;
+				$(sdatas).each(function(index,arr){
+					str+="<tr>";
+					str += "<td>" + arr["code"] + "</td>";
+					str+="<td>" + arr.sang + "</td>";
+					str+="<td>" + arr.su + "</td>";
+					str+="<td>" + arr.dan + "</td>";
+					str+="</td>";
+				});
+				$("tbody").html(str);
+			},
+			error:function(){
+				jQuery("#showErr").text("에러발생");
+			}
+		})
+	});
+});
+</script>
+</head>
+<body>
+<h2>상품 정보 출력(@MVC + ajax)</h2>
+<button id="btnShow">상품 정보 보여줘</button>
+<br/>
+<br/>
+<table>
+	<tr>
+		<tr><th>코드</th><th>품명</th><th>수량</th><th>단가</th></tr>
+	</thead>
+	<tbody>
+		
+		
+	</tbody>
+	
+</table>
+<br/>
+<div id="showErr"></div>
+</body>
+</html>
