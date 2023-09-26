@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>게시판</title>
+	<script type="text/javascript">
+		window.onload = function () {
+			let btnIns = document.getElementById("btnIns");
+			btnIns.addEventListener("click", checkData);
+		}
+
+		function checkData() {
+			if (frm.title.value === "") {
+				alert("제목을 입력하시오");
+				frm.pass.focus();
+				return;
+			}
+
+			if (frm.cont.value === "") {
+				alert("내용을 입력하시오");
+				frm.pass.focus();
+				return;
+			}
+
+			frm.submit();
+		}
+	</script>
+</head>
+
+<body>
+	<!--	<div th:if="${session.idkey==null}">
+		<a href="commu">로그인 후 이용가능합니다</a>
+	</div>
+	<div th:if="${session.idkey != null}">
+		[[${session.idkey}]]님 환영합니다 -->
+	** 글 쓰기 **
+	<p />
+	<form action="insertCommu" method="post" name="frm" enctype="multipart/form-data">
+		<table style="width: 80%">
+			<tr>
+				<td>아이디</td>
+			<!--	<td th:text="${#httpSession.getAttribute('customerid')}"></td> -->
+			<td>아이디 들어올 자리</td>
+			</tr>
+			<tr>
+				<td>제목</td>
+				<td><input type="text" name="title" style="width: 99%"></td>
+			</tr>
+			<tr>
+				<td>내용</td>
+				<td><textarea rows="5" style="width: 99%" name="cont"></textarea></td>
+			</tr>
+			<tr>
+				<td>파일 업로드</td>
+				<td><input type="file" name="file"></td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align: center;">
+					<input type="button" value="등록" id="btnIns" />
+					<button type="button" id="writeBtn" onclick="history.back();">취소</button>
+					<input type="button" value="목록" onclick="location.href='commu?page=1'" />
+				</td>
+			</tr>
+		</table>
+	</form>
+	<!--</div>-->
+</body>
+
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html  xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+	<style>
+        table {
+            width: 57%;
+            border-collapse: collapse;
+            margin-left: auto;
+ 		   margin-right: auto;
+        }
+        th, td {
+            padding: 8px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        th {
+            background-color: tomato;
+            color: white;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        h3 {
+            text-align: center;
+        }
+        a{
+				color: black;
+		}
+		a:hover{
+			color: coral;
+		}
+	</style>
+<script>
+  if (msg !== "") {
+    alert(msg);
+  }
+</script>
+
+<body>
+<h3>커뮤니티</h3>
+<table>
+  <tr>
+  	<td>
+  	[<a th:href="@{/commu}">최근목록</a>]&nbsp;  
+  	[<a th:href="@{/insertCommu}">글쓰기</a>]&nbsp;  <!-- 인스폼으로 바로 보내도 되지 않나-->
+  	[<a th:href="@{/anmt}">공지사항 </a>]&nbsp;
+  	[<a th:href="@{/qlist}">문의게시판 </a>]
+  	</td>
+  </tr>
+</table>
+
+<table border="1">
+	<tr>
+		<th>번호</th><th>글제목</th><th>작성자</th><th>작성일</th><th>조회수</th><th>이미지 여부</th>
+	</tr>
+	<tr th:each="notice : ${alist}">
+        <td>[[${notice.num}]]</td>
+        <td>
+			<img th:src="@{upload/bell.png}" alt="공지사진" width="20" height="20">
+            <a th:href="@{/Adetail(num=${notice.num},page=${page})}">
+                <span th:text="${notice.title}"></span>
+            </a>
+        </td>
+        <td>[[${notice.username}]]</td>
+        <td>[[${notice.cdate}]]</td>
+        <td><img th:src="@{upload/BEST.gif}" alt="gif" width="40" height="25"></td>
+        <td><img th:src="@{upload/hit.gif}" alt="gif" width="40" height="25"></td>
+    </tr>
+
+	<tr th:each="list:${list}">
+		<td>[[${list.num}]]</td>
+    <td>
+        <a th:href="@{/detail(num=${list.num},page=${page})}">
+            <span th:text="${list.title}"></span> 
+            <span th:if="${list.commentcount > 0}">
+                (댓글 : <span th:text="${list.commentcount}"></span>)
+            </span>
+        </a>
+    </td>
+		<td>[[${list.customerid}]]</td>
+		<td>[[${list.cdate}]]</td>
+		<td>[[${list.readcnt}]]</td>
+		<td>
+			<th:block th:if="${list.filename != null}">
+					<img th:src="@{upload/showimage.png}" alt="이미지" width="25" height="25">
+				</th:block>
+				<th:block th:unless="${list.filename != null}">
+				</th:block>
+		</td>
+	</tr>
+	</th>
+	
+	<!-- paging -->
+ 	<tr style="text-align: center;">
+		<td colspan="6">
+		<th:block th:each="num : ${#numbers.sequence(1, pagesu)}">
+			<th:span th:if="${num} == ${page}">
+				<b th:text=${num}>num 표시</b>
+			</th:span>
+			<th:span th:if="${num} != ${page}">
+				<a th:href="@{commu(page=${num})}" th:text="${num}">num 표시</a>
+			</th:span>
+		</th:block>	
+		</td>
+	</tr>
+	</th:block>
+	
+	<!-- 검색 작업 추가 -->
+	<tr style="text-align: center;">
+		<td colspan="6">
+		<br/>
+		<form action="/search" method="get">
+		  검색 대상 : 
+		  <select name="searchName">
+			<option value="customerid" selected>작성자</option>
+			<option value="title">글제목</option>
+		  </select>
+		  <input type="hidden" name="page" th:value="${page}">
+		  <input type="text" name="searchValue">
+		  <input type="submit" value="검 색">
+		</form>
+		</td>
+	</tr>
+</table>
+
+</body>
+</html>

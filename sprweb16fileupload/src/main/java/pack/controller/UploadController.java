@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -19,6 +20,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 public class UploadController {
+	
    @GetMapping("upload")
    public String abc(UploadFile uploadFile) {
       return "uploadform";
@@ -47,7 +49,7 @@ public class UploadController {
          byte[] bytes = new byte[1024];
          // -1 끝을 의미
          while((read = inputStream.read(bytes))!=-1) {
-            outputStream.write(bytes,0,read);
+            outputStream.write(bytes,0,read);  // 업로드된 파일의 데이터가 읽혀서 새로운 파일(newFile)에 저장되는 과정
          }
       } catch (Exception e) {
          System.out.println("file submit err : "+e);

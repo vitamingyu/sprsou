@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" href="/css/board.css">
+</head>
+
+<body>
+	<h3 style="text-align:center;">* 상세 보기 *</h3>
+	<table>
+		<tr>
+			<td style="text-align: right;">
+				<a th:href="@{/update(num=${list.num},page=${page},filename=${list.filename})}">
+					수정하기
+				</a>
+				<a th:href="@{/delete(num=${list.num})}">
+					삭제하기
+				</a>
+				<a th:href="@{/commu(page=${page})}">
+					목록보기
+				</a>
+			</td>
+		</tr>
+	</table>
+
+	<table>
+		<tr>
+			<td>
+				작성자 : [[${list.customerid}]]</a>
+			</td>
+			<td>작성일 : [[${list.cdate}]]</td>
+			<td>조회수 : [[${list.readcnt}]]</td>
+		</tr>
+		<tr>
+			<td colspan="3">제목 : [[${list.title}]]</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				<th:block th:if="${list.filename != null}">
+					<img th:src="@{upload/} + ${list.filename}" alt="이미지" width="300" height="300">
+					<textarea rows="5" style="width: 98%" readonly="readonly">[[${list.cont}]]</textarea>
+				</th:block>
+				<th:block th:unless="${list.filename != null}">
+					<textarea rows="5" style="width: 98%" readonly="readonly">[[${list.cont}]]</textarea>
+				</th:block>
+				
+			</td>
+		</tr>
+	</table>
+	<!-- 댓글 목록-->
+	<form th:action="@{/detail/deleteComment}" method="post">
+		<!-- 위에 삭제해도 될듯?-->
+		<table>
+			<tr>
+				<th>Id</th>
+				<th>댓글 내용</th>
+			</tr>
+			<tr th:each="comment : ${comments}">
+				<td th:text="${comment.idkey}">아이디가 들어올 자리 </td>
+				<td th:text="${comment.content}"></td>
+				<td><a
+						th:href="@{/detail/updateComment(commentId=${comment.idkey},cnum=${comment.id},num=${list.num},page=${page})}">수정</a>
+				</td>
+				<td>
+					<a
+						th:href="@{/detail/deleteComment(id=${comment.idkey},cnum=${comment.id},num=${list.num},page=${page})}">삭제</a>
+				</td>
+			</tr>
+		</table>
+	</form>
+
+	<!-- 댓글 작성 폼 -->
+	<!--	<div th:if="${session.idkey==null}">
+		<a href="commu">로그인 후 이용가능합니다</a>
+	</div>
+	<div th:if="${session.idkey != null}">-->
+	<form th:action="@{/detail/addComment}" method="post">
+		<input type="hidden" name="num" th:value="${list.num}" />
+		<input type="hidden" name="idkey" value="NoIdNow" />
+		<!--<input type="hidden" name="idkey" value="${session.idkey}"/>-->
+		<input type="text" size="50" name="content" placeholder="댓글 내용(150자 이하로 작성 가능합니다)" />
+		<button type="submit">댓글 작성</button>
+	</form>
+	<!-- </div> -->
+
+
+	<button id="myButton">댓글 수정</button>
+
+
+
+
+</body>
+
+</html>

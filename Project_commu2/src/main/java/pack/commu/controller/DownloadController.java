@@ -1,4 +1,4 @@
-package pack.controller;
+package pack.commu.controller;
 
 import java.io.File;
 
@@ -16,7 +16,7 @@ public class DownloadController {
 	@ResponseBody
 	public byte[] downProcess(HttpServletResponse response, @RequestParam String filename) throws Exception{
 		System.out.println("filename : " + filename);
-	    File newFile = new File("C:/Users/MINGYU/Desktop/Project_commu2/src/main/resources/static/upload/" + filename); // 절대경로로 찍기
+	    File newFile = new File("C:/work/sprsou/sprweb16fileupload/src/main/resources/static/upload/" + filename); // 절대경로로 찍기
 		
 		byte[] bytes = FileCopyUtils.copyToByteArray(newFile);
 		String fn = new String(newFile.getName().getBytes(), "iso_8859_1");

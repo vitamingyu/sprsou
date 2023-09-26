@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>이미지 출력</title>
+</head>
+<body>
+    <h1>파일명 : [[${filename}]]</h1>
+    <img th:src="@{upload/} + ${filename}" alt="이미지">
+</body>
+</html>
