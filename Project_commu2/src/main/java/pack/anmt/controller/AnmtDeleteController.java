@@ -1,4 +1,4 @@
-package pack.anmtEvent.controller;
+package pack.anmt.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpSession;
-import pack.anmtEvent.model.AnmtDao;
-import pack.anmtEvent.model.AnmtDto;
+import pack.anmt.model.AnmtDao;
+import pack.anmt.model.AnmtDto;
 import pack.commu.model.CommuDao;
 import pack.commu.model.CommuDto;
 

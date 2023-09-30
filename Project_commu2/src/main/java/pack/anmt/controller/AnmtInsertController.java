@@ -1,4 +1,4 @@
-package pack.anmtEvent.controller;
+package pack.anmt.controller;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.servlet.http.HttpSession;
-import pack.anmtEvent.model.AnmtDao;
+import pack.anmt.model.AnmtDao;
 import pack.commu.controller.UploadFile;
 
 

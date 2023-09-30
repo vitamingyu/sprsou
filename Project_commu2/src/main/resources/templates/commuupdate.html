@@ -31,14 +31,14 @@ function chkUpData(){
 </head>
 <body>
 <h3>* 글 수정 * <br/> 게시글 작성 아이디와 일치해야 글 수정이 가능합니다!</h3>
-<form action="update" method="post" name="upFrm" th:object="${list}" enctype="multipart/form-data">
+<form action="commuupdate" method="post" name="upFrm" th:object="${list}" enctype="multipart/form-data">
 	<input type="hidden" th:field="*{num}">
 	<input type="hidden" name="page" th:value="${page}">
 	<input type="hidden" name="filename" th:value="${filename}">
 	<table border="1" style="width: 80%">
 		<tr>
-			<td>아이디</td>
-			<td>[[${list.customerid}]]</td>
+			<td>작성자</td>
+			<td>[[${list.customernickname}]]</td>
 		</tr>
 		<tr>
 			<td>제목</td>

@@ -1,4 +1,4 @@
-package pack.anmtEvent.controller;
+package pack.anmt.controller;
 
 import java.time.LocalDate;
 import lombok.Data;

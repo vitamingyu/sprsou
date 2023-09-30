@@ -8,10 +8,10 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.servlet.http.HttpSession;
@@ -23,8 +23,12 @@ public class InsertController {
 	private CommuDao comDao;
 
 	@GetMapping("insertCommu")
-	public String insertform() {		
-		return "insform";
+	public String insertform(HttpSession session,Model model) {		
+		String loginId = (String) session.getAttribute("loginId");
+		String nickname = (String) session.getAttribute("nickname");
+		model.addAttribute("customerid",loginId);
+		model.addAttribute("nickname",nickname);
+		return "commuinsform";
 	}
 
 
@@ -33,7 +37,7 @@ public class InsertController {
 		// 업로드 파일 초기화
 		InputStream inputStream = null;
 		OutputStream outputStream = null;
-
+	
 		// 업로드될 파일 검사
 		MultipartFile file = uploadfile.getFile();
 
@@ -49,7 +53,7 @@ public class InsertController {
 			try {
 				inputStream = file.getInputStream();
 				File newFile = new File(
-						"C:\\Users\\MINGYU\\Desktop\\Project_commu2\\src\\main\\resources\\static\\upload\\"
+						"C:\\work\\sprsou\\Project_commu2\\src\\main\\resources\\static\\upload\\"
 								+ filename); // 절대경로로 찍기
 				if (!newFile.exists()) {
 					newFile.createNewFile();
@@ -74,9 +78,10 @@ public class InsertController {
 			}
 			// 파일 업로드 과정 끝
 		}
-		String customerid = "NoIdNow";
-		// String customerid = (String) session.getAttribute("customerid");
+		String customerid = (String) session.getAttribute("loginId");
+		String nickname = (String) session.getAttribute("nickname");
 		bean.setCustomerid(customerid);
+		bean.setCustomernickname(nickname);
 		bean.setCdate();
 
 		boolean b = comDao.comuinsert(bean);

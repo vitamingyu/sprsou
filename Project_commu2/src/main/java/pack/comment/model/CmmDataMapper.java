@@ -1,6 +1,7 @@
 package pack.comment.model;
 
 import java.util.ArrayList;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -12,7 +13,7 @@ import org.apache.ibatis.annotations.Update;
 public interface CmmDataMapper {
 	
 	//게시글의 댓글 목록 조회
-	@Select("select id, num, content,idkey FROM comment_table WHERE num = #{num}")
+	@Select("select id, num, content,idkey,customernickname FROM comment_table WHERE num = #{num}")
 	ArrayList<CommentDto> selectCommentsByNum(int num); 
 	
 	// 댓글 수정 전 조회
@@ -24,7 +25,7 @@ public interface CmmDataMapper {
 	int updateCom(@Param("content")String content, @Param("id") int id);
 	
 	//댓 작성
-	@Insert("insert into comment_table (idkey,num, content) VALUES (#{idkey},#{num}, #{content})")
+	@Insert("insert into comment_table (idkey,num, content,customernickname) VALUES (#{idkey},#{num}, #{content},#{customernickname})")
 	void insertComment(CommentDto commentDto);
 	
 	// 댓삭

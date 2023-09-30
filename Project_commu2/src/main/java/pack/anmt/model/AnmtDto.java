@@ -1,4 +1,4 @@
-package pack.anmtEvent.model;
+package pack.anmt.model;
 
 import lombok.Data;
 

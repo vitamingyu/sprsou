@@ -1,14 +1,16 @@
 package pack.commu.controller;
 
 import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import pack.anmtEvent.model.AnmtDao;
-import pack.anmtEvent.model.AnmtDto;
+import jakarta.servlet.http.HttpSession;
+import pack.anmt.model.AnmtDao;
+import pack.anmt.model.AnmtDto;
 import pack.commu.model.CommuDao;
 import pack.commu.model.CommuDto;
 
@@ -45,11 +47,17 @@ public class PLSController {
 	}
 
 	@GetMapping("commu")
-	public String listProcess(@RequestParam(name = "page", defaultValue = "1") int page,Model model) {
+	public String listProcess(@RequestParam(name = "page", defaultValue = "1") int page,Model model,HttpSession session) {
 		int spage = page;
 		if (page <= 0)
 			spage = 1;
-
+		session.removeAttribute("msg");
+		String loginId = (String) session.getAttribute("loginId");
+		String nickname = (String) session.getAttribute("nickname");
+		//System.out.println(nickname);
+		
+//		session.setAttribute("loginId", customerDto.getCustomerid());
+		
 		// 전체자료 읽어오기, paging 처리도 함
 		ArrayList<CommuDto> list = (ArrayList<CommuDto>) comDao.selectAll();
 		ArrayList<CommuDto> result = getListdata(list, spage);
@@ -59,12 +67,13 @@ public class PLSController {
 		model.addAttribute("list", result);
 		model.addAttribute("pagesu", getPageSu());
 		model.addAttribute("page", spage);
-		
+		model.addAttribute("customerid",loginId);
+		model.addAttribute("nickname",nickname);
 		
 		return "commu";
 	}
 
-	@GetMapping("search")
+	@GetMapping("commu/search")
 	public String searchProcess(CommuBean bean, Model model,@RequestParam("page")int page) {
 		// System.out.println(bean.getSearchName() + " " + bean.getSearchValue());
 

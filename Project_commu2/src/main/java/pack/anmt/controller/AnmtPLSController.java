@@ -1,4 +1,4 @@
-package pack.anmtEvent.controller;
+package pack.anmt.controller;
 
 import java.util.ArrayList;
 
@@ -8,8 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import pack.anmtEvent.model.AnmtDao;
-import pack.anmtEvent.model.AnmtDto;
+import pack.anmt.model.AnmtDao;
+import pack.anmt.model.AnmtDto;
 
 @Controller
 public class AnmtPLSController {

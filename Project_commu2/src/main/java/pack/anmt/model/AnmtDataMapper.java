@@ -1,13 +1,14 @@
-package pack.anmtEvent.model;
+package pack.anmt.model;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import pack.anmtEvent.controller.AnmtBean;
+import pack.anmt.controller.AnmtBean;
 
 
 @Mapper

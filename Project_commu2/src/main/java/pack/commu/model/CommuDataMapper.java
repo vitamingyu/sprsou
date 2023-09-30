@@ -1,6 +1,7 @@
 package pack.commu.model;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -32,7 +33,7 @@ int totalCnt();
 		+ "		where ${searchName} like concat('%',#{searchValue},'%') order by num desc")
 int searchCnt(@Param("searchName") String searchName, @Param("searchValue") String searchValue);
 
-@Insert("insert into commu (customerid, title, cont, filename, cdate) VALUES (#{customerid}, #{title}, #{cont}, #{filename}, #{cdate})")
+@Insert("insert into commu (customerid, customernickname, title, cont, filename, cdate) VALUES (#{customerid}, #{customernickname}, #{title}, #{cont}, #{filename}, #{cdate})")
 int insertCommu(CommuBean bean);
 
 @Update("update commu set readcnt=readcnt + 1 where num=#{num}")

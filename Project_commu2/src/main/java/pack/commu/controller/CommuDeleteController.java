@@ -16,27 +16,27 @@ public class CommuDeleteController {
 	@Autowired
 	private CommuDao comDao;
 
-	@GetMapping("delete")
-	public String edit(@RequestParam("num")String num, Model model) {
+	@GetMapping("commudelete")
+	public String edit(@RequestParam("num") String num, Model model, HttpSession session) {
 		CommuDto dto = comDao.detail(num);
-		model.addAttribute("list", dto);
-		return "delete";
+		String loginId = (String) session.getAttribute("loginId");
+		String customerid = dto.getCustomerid();
+
+		if (customerid.equals(loginId)) {
+			model.addAttribute("list", dto);
+			return "commudelete";
+		} else {
+			return "redirect:/commu";
+		}
 	}
-   
-	@PostMapping("delete")
-	public String del(@RequestParam("num") String num,CommuBean bean,HttpSession session) {
-		//String customerid = (String) session.getAttribute("customerid");
-		//(String) session.getAttribute("idkey");
-		//customerid.equals(idkey
-		if (true) { 
-			boolean b = comDao.delete(num);
-			if (b) {
-					return "redirect:commu";
-			}else {
-					return "redirect:error";
-			}
-		}else{
-			return"redirect:commu";
+
+	@PostMapping("commudelete")
+	public String del(@RequestParam("num") String num, CommuBean bean, HttpSession session) {
+		boolean b = comDao.delete(num);
+		if (b) {
+			return "redirect:commu";
+		} else {
+			return "redirect:error";
 		}
 	}
 }
