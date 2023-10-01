@@ -12,6 +12,7 @@
   	<td>
   	[<a th:href="@{/qlist}">최근목록</a>]&nbsp;  
   	[<a th:href="@{/qinsert}">글쓰기</a>]
+  	[<a th:href="@{/qsearch(searchName='name', page=${page}, searchValue=${nickname})}">내 문의 글 보기</a>]
   	</td>
   </tr>
 </table>
@@ -30,7 +31,7 @@
 			</th:block>
 			[[${tab}]]<a th:href="@{/qdetail(num=${b.num},page=${page})}" th:text="${b.title}"></a>
 		</td>
-		<td>[[${b.id}]]</td>
+		<td>[[${b.name}]]</td>
 		<td>[[${b.bdate}]]</td>
 		<td>[[${b.readcnt}]]</td>
 	</tr>
@@ -57,7 +58,7 @@
 		<form action="/qsearch" method="get">
 		  검색 대상 : 
 		  <select name="searchName">
-			<option value='id' selected>작성자</option>
+			<option value='name' selected>작성자</option>
 			<option value='title'>글제목</option>
 		  </select>
 		  <input type="text" name="searchValue">

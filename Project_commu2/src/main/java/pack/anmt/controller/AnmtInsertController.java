@@ -11,13 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.servlet.http.HttpSession;
 import pack.anmt.model.AnmtDao;
 import pack.commu.controller.UploadFile;
-
 
 @Controller
 public class AnmtInsertController {
@@ -25,12 +23,18 @@ public class AnmtInsertController {
 	private AnmtDao dao;
 
 	@GetMapping("insertAnmt")
-	public String insertAnmtform() {
-		return "insertAnmtform";
+	public String insertAnmtform(HttpSession session) {
+		Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
+		if (isAdmin != null && isAdmin) {
+			return "anmtInsert";
+		}
+		// 관리자로 로그인되지 않은 경우 로그인 페이지로 이동
+		return "redirect:/adminlogin";
 	}
 
 	@PostMapping("insertAnmt")
-	public String insertProcess(AnmtBean bean,UploadFile uploadfile, BindingResult result, HttpSession session) {
+	public String insertProcess(HttpSession session, AnmtBean bean, UploadFile uploadfile, BindingResult result) {
+
 		InputStream inputStream = null;
 		OutputStream outputStream = null;
 
@@ -72,11 +76,11 @@ public class AnmtInsertController {
 			}
 			// 파일 업로드 과정 끝
 		}
-		String username = "NoIdNow";
-		// String customernickname = (String) session.getAttribute("customernickname");
-		bean.setUsername(username);
+
+		String adminname = (String) session.getAttribute("adminname");
+		bean.setAdminname(adminname);
 		bean.setCdate();
-		
+
 		boolean b = dao.anmtinsert(bean);
 		if (b) {
 			return "redirect:/anmt?page=1"; // 추가 후 목록 보기
@@ -84,5 +88,4 @@ public class AnmtInsertController {
 			return "redirect:/error";
 		}
 	}
-
 }

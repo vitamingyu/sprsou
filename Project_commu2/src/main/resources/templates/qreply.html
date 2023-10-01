@@ -28,8 +28,8 @@ function chk(){
 </script>
 </head>
 <body>
-<h3>* 답글 쓰기 *</h3>
-<form action="qreply" method="post" name="reFrm" th:object="${data}">
+<h3>* 문의 답글 쓰기 *</h3>
+<form action="qreply" method="post" name="reFrm" th:object="${data}" enctype="multipart/form-data">
 	<input type="hidden" name="page" th:value="${page}">
 	<input type="hidden" th:field="*{gnum}">
 	<input type="hidden" th:field="*{onum}">
@@ -37,8 +37,8 @@ function chk(){
 	
 	<table border="1" style="width: 80%">
 		<tr>
-			<td>아이디</td>
-			<td><input type="hidden" name="id" value="관리자">관리자 아이디가 들어올 값, 세션에서 추가하기</td>
+			<td>작성자</td>
+			<td  th:text="${nickname}"></td> 
 		</tr>
 		<tr>
 			<td>제목</td>
@@ -57,8 +57,13 @@ function chk(){
 			<td><textarea rows="5" style="width: 99%" name="cont"></textarea></td>
 		</tr>
 		<tr>
+				<td>파일 업로드</td>
+				<td><input type="file" name="file"></td>
+			</tr>
+		<tr>
 			<td colspan="2" style="text-align: center;">
 				<input type="button" value="완료" id="btnReply" /> 
+				<button type="button" id="writeBtn" onclick="history.back();">취소</button>
 				<input type="button" value="목록" onclick="javascript:window.location.href='qlist.html?page=${page}'" />
 			</td>
 		</tr>

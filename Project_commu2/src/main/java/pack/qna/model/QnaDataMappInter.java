@@ -21,8 +21,8 @@ public interface QnaDataMappInter {
     @Select("select * from qna where num=#{num}")
     QnaDto selectOne(String num);
 
-    @Insert("insert into qna (id, title, cont, bdate, gnum)\r\n"
-    		+ " values (#{id}, #{title}, #{cont}, #{bdate}, #{gnum})")
+    @Insert("insert into qna (id, title, cont, bdate, gnum,name,filename)\r\n"
+    		+ " values (#{id}, #{title}, #{cont}, #{bdate}, #{gnum},#{name},#{filename})")
     int insertData(QnaBean bean);
 
     @Update("update qna set readcnt=readcnt + 1 where num=#{num}")
@@ -43,8 +43,8 @@ public interface QnaDataMappInter {
     @Update("update qna set onum=onum + 1 where onum >= #{onum} and gnum=#{gnum}")
     int updateOnum(QnaBean bean);
 
-    @Insert("insert into qna (id, title, cont, bdate, gnum,onum,nested)\r\n"
-    		+ " values (#{id}, #{title}, #{cont}, #{bdate}, #{gnum},#{onum},#{nested})")
+    @Insert("insert into qna (id, title, cont, bdate, gnum,onum,nested,name)\r\n"
+    		+ " values (#{id}, #{title}, #{cont}, #{bdate}, #{gnum},#{onum},#{nested},#{name})")
     int insertReData(QnaBean bean);
 
 }

@@ -32,7 +32,7 @@ AnmtDto selectOne(String num);
 @Select("select count(*) from anmt")
 int totalCnt();
 
-@Insert("insert into anmt (username, title, content, filename, cdate) VALUES (#{username}, #{title}, #{content}, #{filename},#{cdate})")
+@Insert("insert into anmt (adminname, title, content, filename, cdate) VALUES (#{adminname}, #{title}, #{content}, #{filename},#{cdate})")
 int insertAnmt(AnmtBean bean); 
 
 

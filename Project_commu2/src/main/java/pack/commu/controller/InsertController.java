@@ -25,10 +25,13 @@ public class InsertController {
 	@GetMapping("insertCommu")
 	public String insertform(HttpSession session,Model model) {		
 		String loginId = (String) session.getAttribute("loginId");
+		if(loginId!=null) {
 		String nickname = (String) session.getAttribute("nickname");
-		model.addAttribute("customerid",loginId);
 		model.addAttribute("nickname",nickname);
 		return "commuinsform";
+	}else {
+	return "redirect:/commu";	
+	}
 	}
 
 

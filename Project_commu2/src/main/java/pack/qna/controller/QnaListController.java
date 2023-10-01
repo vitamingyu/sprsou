@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jakarta.servlet.http.HttpSession;
 import pack.qna.model.QnaDaoImpl;
 import pack.qna.model.QnaDto;
 
@@ -24,13 +25,11 @@ public class QnaListController {
 		ArrayList<QnaDto> result = new ArrayList<QnaDto>();
 		
 		int start = (page - 1) * plist;   // 0, 10, 20, ...
-		System.out.println("start:" + start);
 		
 		int size = plist <= list.size() - start?plist : list.size() - start;   // 삼항 연산  
 		
 		for (int i = 0; i < size; i++) {
 			result.add(i, list.get(start + i));
-			System.out.println("i:" + i + ", start + i : " + (start + i));
 		}
 		return result;
 	}
@@ -43,7 +42,7 @@ public class QnaListController {
 	}
 
 	@GetMapping("qlist")
-	public String listProcess(@RequestParam(name="page", defaultValue="1")int page, Model model) {
+	public String listProcess(@RequestParam(name="page", defaultValue="1")int page, Model model,HttpSession session) {
 		int spage = 0;
 		try {
 			spage = page;
@@ -51,8 +50,6 @@ public class QnaListController {
 			spage = 1;
 		}
 		if(page <= 0) spage = 1;
-		
-		//model.addAttribute("data", list);   // paging이 없는 경우
    
 		// paging 처리도 함
 		ArrayList<QnaDto> list = (ArrayList<QnaDto>)daoImpl.listAll();
@@ -61,18 +58,22 @@ public class QnaListController {
 		model.addAttribute("data", result);
 		model.addAttribute("pagesu", getPageSu());
 		model.addAttribute("page", spage);
+		String nickname = (String) session.getAttribute("nickname");
+		model.addAttribute("nickname",nickname);
 		
 		return "qlist";
 	}
 	
 	@GetMapping("qsearch")
-	public String searchProcess(QnaBean bean, Model model) {
+	public String searchProcess(QnaBean bean, Model model,HttpSession session) {
 		//System.out.println(bean.getSearchName() + " " + bean.getSearchValue());
 		ArrayList<QnaDto> list = (ArrayList<QnaDto>)daoImpl.search(bean);
 		
 		model.addAttribute("data", list);
 		model.addAttribute("pagesu", getPageSu());
 		model.addAttribute("page", "1");
+		String nickname = (String) session.getAttribute("nickname");
+		model.addAttribute("nickname",nickname);
 		return "qlist";
 	}
 

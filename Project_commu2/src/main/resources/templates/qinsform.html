@@ -31,12 +31,12 @@
 
 <body>
 	** 글 쓰기 **
-	<p /><!-- 히든으로 현재 세션 id값 넘기기-->
-	<form action="qinsert" method="post" name="frm">
+	<p />
+	<form action="qinsert" method="post" name="frm" enctype="multipart/form-data">
 		<table style="width: 80%">
 			<tr>
-				<td>아이디</td>
-				<td><input type="hidden" name="id" value="NotNow">아이디 불러와서 넘기세요</td>
+				<td>작성자</td>
+				<td th:text="${nickname}"></td>
 			</tr>
 			<tr>
 				<td>제목</td>
@@ -47,8 +47,13 @@
 				<td><textarea rows="5" style="width: 99%" name="cont"></textarea></td>
 			</tr>
 			<tr>
+				<td>파일 업로드</td>
+				<td><input type="file" name="file"></td>
+			</tr>
+			<tr>
 				<td colspan="2" style="text-align: center;">
 					<input type="button" value="등록" id="btnIns" />
+					<button type="button" id="writeBtn" onclick="history.back();">취소</button>
 					<input type="button" value="목록" onclick="location.href='qnalist?page=1'" />
 				</td>
 			</tr>

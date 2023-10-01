@@ -73,8 +73,8 @@ public class PLSController {
 		return "commu";
 	}
 
-	@GetMapping("commu/search")
-	public String searchProcess(CommuBean bean, Model model,@RequestParam("page")int page) {
+	@GetMapping("/commu/search")
+	public String searchProcess(CommuBean bean, Model model,@RequestParam("page")int page,HttpSession session) {
 		// System.out.println(bean.getSearchName() + " " + bean.getSearchValue());
 
 		int spage = page;
@@ -91,6 +91,8 @@ public class PLSController {
 		model.addAttribute("list", result);
 		model.addAttribute("pagesu", searchPagesu);
 		model.addAttribute("page", spage);
+		String nickname = (String) session.getAttribute("nickname");
+		model.addAttribute("nickname",nickname);
 		return "commu";
 	}
 

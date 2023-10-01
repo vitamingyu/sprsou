@@ -1,12 +1,13 @@
 package pack.qna.controller;
 
 import java.time.LocalDate;
+
 import lombok.Data;
 
 @Data
 public class QnaBean {
 	private int num, readcnt, gnum, onum, nested;
-	private String id, title, cont, bdate;
+	private String id, title, cont, bdate,name,filename;
 	private String searchName, searchValue;
 	
 	public void setBdate() {
