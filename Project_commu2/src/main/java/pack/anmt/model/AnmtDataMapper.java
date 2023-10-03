@@ -32,11 +32,11 @@ AnmtDto selectOne(String num);
 @Select("select count(*) from anmt")
 int totalCnt();
 
-@Insert("insert into anmt (adminname, title, content, filename, cdate) VALUES (#{adminname}, #{title}, #{content}, #{filename},#{cdate})")
+@Insert("insert into anmt (adminname, title, content, filename, cdate,eventnotice) VALUES (#{adminname}, #{title}, #{content}, #{filename},#{cdate},#{eventnotice})")
 int insertAnmt(AnmtBean bean); 
 
 
-@Update("update anmt set title=#{title},content=#{content},filename=#{filename} where num=#{num}")
+@Update("update anmt set title=#{title},content=#{content},filename=#{filename},eventnotice=#{eventnotice} where num=#{num}")
 int updateData(AnmtBean bean);
 
 @Delete("delete from anmt where num=#{num}")

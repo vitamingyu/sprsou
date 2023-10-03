@@ -62,7 +62,7 @@ public class UpdateController {
 			try {
 				inputStream = file.getInputStream();
 				File newFile = new File(
-						"C:\\work\\sprsou\\Project_commu2\\src\\main\\resources\\static\\upload"
+						"C:\\work\\sprsou\\Project_commu2\\src\\main\\resources\\static\\upload\\"
 				+ filename); // 절대경로로 찍기
 				if (!newFile.exists()) {
 					newFile.createNewFile();
@@ -81,7 +81,7 @@ public class UpdateController {
 				if (b) {
 					// 상세보기로 이동
 					model.addAttribute("msg", "수정성공");
-					return "redirect:detail?num=" + bean.getNum() + "&page=" + page;
+					return "redirect:commudetail?num=" + bean.getNum() + "&page=" + page;
 				} else {
 					return "redirect:err";
 				}
@@ -96,11 +96,11 @@ public class UpdateController {
 				}
 			}
 		} else { // 파일업로드 안 했을시
-			bean.setFilename(orifilename);
+			//bean.setFilename(orifilename);
 			boolean b = comDao.update(bean);
 			if (b) {
 				// 상세보기로 이동
-				return "redirect:detail?num=" + bean.getNum() + "&page=" + page;
+				return "redirect:commudetail?num=" + bean.getNum() + "&page=" + page;
 			} else {
 				return "redirect:err";
 			}

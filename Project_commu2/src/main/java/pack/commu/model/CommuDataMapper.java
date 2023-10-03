@@ -39,7 +39,7 @@ int insertCommu(CommuBean bean);
 @Update("update commu set readcnt=readcnt + 1 where num=#{num}")
 int updateReadcnt(String num);
 
-@Update("update commu set customerid=#{customerid},title=#{title},cont=#{cont},filename=#{filename} where num=#{num}")
+@Update("update commu set title=#{title},cont=#{cont},filename=#{filename} where num=#{num}")
 int updateData(CommuBean bean);
 
 @Delete("delete from commu where num=#{num}")

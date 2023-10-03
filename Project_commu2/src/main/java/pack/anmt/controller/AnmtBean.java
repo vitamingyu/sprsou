@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class AnmtBean {
-	private int num;
+	private int num,eventnotice;
 	private String adminname, title, content, filename, cdate;
 	private String searchName, searchValue;
 	

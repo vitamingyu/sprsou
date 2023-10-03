@@ -54,7 +54,11 @@ public class PLSController {
 		session.removeAttribute("msg");
 		String loginId = (String) session.getAttribute("loginId");
 		String nickname = (String) session.getAttribute("nickname");
-		//System.out.println(nickname);
+	    // 관리자 여부를 가져오고, 값이 없을 경우 false로 설정
+	       Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
+	       if (isAdmin == null) {
+	           isAdmin = false;
+	       }
 		
 //		session.setAttribute("loginId", customerDto.getCustomerid());
 		
@@ -69,7 +73,8 @@ public class PLSController {
 		model.addAttribute("page", spage);
 		model.addAttribute("customerid",loginId);
 		model.addAttribute("nickname",nickname);
-		
+		model.addAttribute("isAdmin", isAdmin); // 관리자 여부를 모델에 추가
+
 		return "commu";
 	}
 
