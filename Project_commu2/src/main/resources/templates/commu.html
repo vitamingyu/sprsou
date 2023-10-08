@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<style>
+		table {
+			width: 57%;
+			border-collapse: collapse;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		th,
+		td {
+			padding: 8px;
+			text-align: center;
+			border-bottom: 1px solid #ddd;
+		}
+
+		tr:hover {
+			background-color: #f5f5f5;
+		}
+
+		th {
+			background-color: tomato;
+			color: white;
+		}
+
+		.container {
+			width: 80%;
+			margin: 0 auto;
+		}
+
+		h3 {
+			text-align: center;
+		}
+
+		a {
+			color: black;
+		}
+
+		a:hover {
+			color: coral;
+		}
+	</style>
+
+
+
+	<script>
+		window.kakaoAsyncInit = function () {
+			Kakao.Channel.createChatButton({
+				container: '#kakao-talk-channel-chat-button',
+			});
+		};
+
+		(function (d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s); js.id = id;
+			js.src = 'https://t1.kakaocdn.net/kakao_js_sdk/2.4.0/kakao.channel.min.js';
+			js.integrity = 'sha384-bg2pMhokxyx1zeEM2ol2hJtBagKMjRIZDVI/KITe+j2U5K+Or6HPY1lWDWY8ubEN';
+			js.crossOrigin = 'anonymous';
+			fjs.parentNode.insertBefore(js, fjs);
+		})(document, 'script', 'kakao-js-sdk');
+	</script>
+</head>
+
+<body>
+	<th:block th:replace="header :: headerFragment"></th:block>
+
+	<div id="kakao-talk-channel-chat-button" data-channel-public-id="_XdjxlG" data-title="consult" data-size="small"
+		data-color="yellow" data-shape="pc" data-support-multiple-densities="true"></div>
+
+	<div id="comDiv">
+		<h3>커뮤니티</h3>
+		<a id="myPostsLink" href="#">내 글 조회</a>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js" charset="UTF-8"></script>
+		<script th:inline="javascript">
+
+			/*<![CDATA[*/
+			$(document).ready(function () {
+				$("#myPostsLink").click(function () {
+					var nickname = /*[[${nickname}]]*/;
+					console.log("닉네임 값: " + nickname);
+					$.ajax({
+						type: "GET",
+						url: "/commu/search",
+						data: {
+							searchName: "customernickname",
+							page: "1",
+							searchValue: nickname
+						},
+						success: function (data) {
+							$("#comDiv").html(data);
+						},
+						error: function () {
+							console.log("실패");
+						}
+					});
+				});
+			});
+    /*]]>*/
+		</script>
+
+		<form action="/commu/search" method="get">
+			<input type="hidden" name="searchName" value="customernickname" />
+			<input type="hidden" name="page" th:value="${page}">
+			<input type="hidden" name="searchValue" th:value="${nickname}">
+			<input type="submit" value="내 글 보기">
+		</form>
+		<a th:href="@{/commu/search(searchName='customernickname', page=${page}, searchValue=${nickname})}">내 글 보기</a>
+
+
+
+
+		<table>
+			<tr>
+				<td>
+					[<a th:href="@{/commu}">최근목록</a>]&nbsp;
+					[<a th:href="@{/insertCommu}">글쓰기</a>]&nbsp;
+					[<a th:href="@{/anmt}">공지사항 </a>]&nbsp;
+					[<a th:href="@{/qlist}">문의게시판 </a>]
+				</td>
+			</tr>
+			<tr>
+				<td><b>[[${nickname}]]</b> 님 환영합니다!</td>
+			</tr>
+		</table>
+
+		<table border="1">
+			<tr>
+				<th>번호</th>
+				<th>글제목</th>
+				<th>작성자</th>
+				<th>작성일</th>
+				<th>조회수</th>
+				<th>이미지 여부</th>
+			</tr>
+			<tr th:each="notice : ${alist}">
+				<td>[[${notice.num}]]</td>
+				<td>
+					<img th:src="@{upload/bell.png}" alt="공지사진" width="20" height="20">
+					<a th:href="@{/Adetail(num=${notice.num},page=${page})}">
+						<span th:text="${notice.title}"></span>
+					</a>
+				</td>
+				<td>[[${notice.adminname}]]</td>
+				<td>[[${notice.cdate}]]</td>
+				<td><img th:src="@{upload/BEST.gif}" alt="gif" width="40" height="25"></td>
+				<td><img th:src="@{upload/hit.gif}" alt="gif" width="40" height="25"></td>
+				<td th:if="${isAdmin}">
+					<a th:href="@{/deletePost(num=${notice.num})}">삭제</a>
+				</td>
+			</tr>
+
+			<tr th:each="list:${list}">
+				<td>[[${list.num}]]</td>
+				<td>
+					<a th:href="@{/commudetail(num=${list.num},page=${page})}">
+						<span th:text="${list.title}"></span>
+						<span th:if="${list.commentcount > 0}">
+							(댓글 : <span th:text="${list.commentcount}"></span>)
+						</span>
+					</a>
+				</td>
+				<td>[[${list.customernickname}]]</td>
+				<td>[[${list.cdate}]]</td>
+				<td>[[${list.readcnt}]]</td>
+				<td>
+					<th:block th:if="${list.filename != null}">
+						<img th:src="@{upload/showimage.png}" alt="이미지" width="25" height="25">
+					</th:block>
+					<th:block th:unless="${list.filename != null}">
+					</th:block>
+				</td>
+			</tr>
+			</th>
+
+			<!-- paging -->
+			<tr style="text-align: center;">
+				<td colspan="6">
+					<th:block th:each="num : ${#numbers.sequence(1, pagesu)}">
+						<th:span th:if="${num} == ${page}">
+							<b th:text=${num}>num 표시</b>
+						</th:span>
+						<th:span th:if="${num} != ${page}">
+							<a th:href="@{commu(page=${num})}" th:text="${num}">num 표시</a>
+						</th:span>
+					</th:block>
+				</td>
+			</tr>
+			</th:block>
+
+			<!-- 검색 작업 추가 -->
+			<tr style="text-align: center;">
+				<td colspan="6">
+					<br />
+					<form action="/commu/search" method="get">
+						검색 대상 :
+						<select name="searchName">
+							<option value="customernickname" selected>작성자</option>
+							<option value="title">글제목</option>
+						</select>
+						<input type="hidden" name="page" th:value="${page}">
+						<input type="text" name="searchValue">
+						<input type="submit" value="검 색">
+					</form>
+				</td>
+			</tr>
+		</table>
+
+		<script src="../js/map.js"></script>
+		<p />
+
+	
+	<th:block th:replace="footer :: footerFragment"></th:block>
+</body>
+
+</html>

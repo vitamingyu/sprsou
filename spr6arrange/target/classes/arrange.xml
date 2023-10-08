@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="msgImpl" class="pack.MessageImpl" scope="prototype"> <!-- scope="singleton" 이 기본값. main에서 getbean하여 출력시 주소를 다르게 줄거냐
+	객체를 싱글톤으로 만들것인가 따로따로 만들것이냐 bean을 통해 객체 생성시 지정해주는 거임. request :  http요청이 있을 때마다 객체 생성 session:세션이 유효해야 객체 생성
+	property:? -->
+		<constructor-arg>  <!-- 6번은 파라미터 없는 생성자를 호출 => impl에 파라미터 없는 생성자 없으니 오류남, 그래서 constructor로 값 넣어줌 -->
+			<value>홍길동</value>
+		</constructor-arg>
+		<!-- 
+		<constructor-arg index="1">   순서대로 들어감, name2가 추가되어 얘도 써줌. 위에는 index 0임 생략되어이는거. 이걸로 입력 순서를 정하는거 
+			<value>홍두</value>
+		</constructor-arg>
+		 -->
+		 <constructor-arg index="0" type="java.lang.String" value="홍두께"/> <!-- java.lang.은 빼도 됨 -->
+		 <constructor-arg index="2" type="int" value="2000"/>
+		 <constructor-arg index="3" type="pack.MyInfo" ref="myInfo"/> <!-- type은 굳이 안 써도 됨, 부모가 있다면 부모의 타입을 써야한다?, ref에 aa나 bb줘도 됨 -->
+		 
+		<!-- setter -->
+		<property name="spec">
+			<value>자바 전문 개발자</value>
+		</property>
+		
+		<property name="myInfo">
+			<ref bean="myInfo"/>
+		</property>
+		<property name="inter"> <!-- MessageImpl에 인자로 넣은게 inter라서 이거 써줌, 그래야 setInter로 입력되어 들어감 -->
+			<ref bean="outDataImpl"/> <!-- ref bean을 통해 bean id로 선언해준 id값을 참조 -->
+		</property>
+		</bean>
+	
+	
+	<bean id="myInfo" name="aa, bb" class="pack.MyInfo" scope="singleton" /> <!-- singleton은 그냥 굳이 써줌 -->
+	<bean id="outDataImpl" class="etc.OutDataImpl">
+		<property name="filePath" value="c:/work/sprtest.txt" />
+	</bean>
+</beans>

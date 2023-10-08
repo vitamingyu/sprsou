@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("td.rating").each(function () {
+                var rating = parseInt($(this).text());
+                var stars = "";
+                for (var i = 1; i <= 5; i++) {
+                    if (i <= rating) {
+                        stars += "&#9733;";
+                    } else {
+                        stars += "&#9734;";
+                    }
+                }
+                $(this).html(stars);
+            });
+        });
+    </script>
+</head>
+<body>
+<h3>리뷰 상세보기</h3>
+<table>
+	<tr>
+		<td>리뷰 아이디 : [[${data.reviewid}]]</td>
+		<!-- 고객 아이디 추가 하기 -->
+		<td>상품 아이디 : [[${data.productid}]]</td>
+		<td>등록일 : [[${data.reviewdate}]]</td>
+	</tr>
+	<tr>
+		<td>별점</td>
+		<td class="rating" th:text="${data.rating}"></td>
+	</tr>
+	<tr>
+		<td>상품평 : [[${data.comment}]]</td>
+	</tr>
+	<tr>
+		<td> <img th:src="@{upload/}+${data.rimage}"/> </td>
+	</tr>
+	<tr>
+		<td><a th:href="@{/reviewupdate(reviewid=${data.reviewid},page=${page},rimage=${data.rimage})}">리뷰 수정</a> &nbsp;&nbsp;
+		<a th:href="@{/reviewdelete(reviewid=${data.reviewid},page=${page})}">리뷰 삭제</a></td>
+	</tr>
+	<tr><td><a th:href="@{/rimagedelete(reviewid=${data.reviewid})}">사진삭제</a></td></tr> <!--작성자만 삭제할 수 있도록 하는 기능 추가 필요 -->
+</table>
+
+</body>
+</html>
